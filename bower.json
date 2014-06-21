@@ -1,0 +1,21 @@
+{
+  "name": "famous-chart-demos",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sghall/famous-chart-demos",
+  "authors": [
+    "shall <hall.steven.g@gmail.com>"
+  ],
+  "description": "Demo charts combining famo.us and d3",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "famous": "~0.2.1",
+    "d3": "~3.4.8"
+  }
+}
