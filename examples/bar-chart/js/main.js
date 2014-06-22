@@ -11,10 +11,10 @@ define(function(require, exports, module) {
 
     var el = document.getElementById('chart-div');
     var mainContext = Engine.createContext(el);    
-    mainContext.setPerspective(3000);
+    mainContext.setPerspective(500);
     var surfaces = [];
     var scrollview = new Scrollview({
-        margin: 10
+        margin: 40
     });
 
     Engine.pipe(scrollview);
@@ -37,7 +37,7 @@ define(function(require, exports, module) {
 
     d3.csv('data/letters.csv', function (err, data) {
 
-      for (var i = 0; i < 20; i++) {
+      for (var i = 0; i < 30; i++) {
           var surface = barChart(400, 800, 'letter', 'frequency', data, mainContext);
 
           surfaces.push(surface);
