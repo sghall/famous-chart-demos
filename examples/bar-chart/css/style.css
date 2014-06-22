@@ -1,6 +1,6 @@
 body {
   color: white;
-  background-color: #333;
+  background-color: #36393B;
 }
 
 #chart-div {
@@ -9,7 +9,7 @@ body {
 
 .tooltip {
   display: none;
-  background: black;
+  background: #45484B;
   border: 2px solid white;
   pointer-events: none;
   padding: 5px 10px;
