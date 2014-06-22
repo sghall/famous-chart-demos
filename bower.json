@@ -7,15 +7,9 @@
   ],
   "description": "Demo charts combining famo.us and d3",
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "famous": "~0.2.1",
-    "d3": "~3.4.8"
+    "d3": "~3.4.8",
+    "requirejs": "~2.1.14"
   }
 }
