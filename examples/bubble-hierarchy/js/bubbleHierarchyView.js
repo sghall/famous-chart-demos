@@ -19,7 +19,7 @@ define(function(require, exports, module) {
     var diameter = dim1 < dim2 ? dim1: dim2;
 
     var format = d3.format(",d");
-    var color = d3.scale.ordinal().range(['#58625C','#4C5355','#89817A','#36211C','#A5A9AA']);
+    var color = d3.scale.ordinal().range(['#58625C','#4C5355','#89817A','#36211C','#A5A9AA','#121E21']);
 
     var bubble = d3.layout.pack()
         .sort(function (d) { return d.comb})
@@ -123,7 +123,7 @@ define(function(require, exports, module) {
           );
 
           this.setProperties({
-            backgroundColor: '#A5A9AA'
+            backgroundColor: '#C0B5B2'
           });
         }
       });
