@@ -1,13 +1,13 @@
 define(function(require, exports, module) {
     'use strict';
-    var Engine        = require('famous/core/Engine');
-    var Surface       = require('famous/core/Surface');
-    var Transform     = require('famous/core/Transform');
-    var Scrollview    = require('famous/views/Scrollview');
-    var StateModifier = require('famous/modifiers/StateModifier');
-    var ViewSequence  = require('famous/core/ViewSequence');
-    var barChartView  = require('barChartView');
-    var d3            = require('d3/d3');
+    var Engine           = require('famous/core/Engine');
+    var Surface          = require('famous/core/Surface');
+    var Transform        = require('famous/core/Transform');
+    var Scrollview       = require('famous/views/Scrollview');
+    var StateModifier    = require('famous/modifiers/StateModifier');
+    var ViewSequence     = require('famous/core/ViewSequence');
+    var bubbleChartView  = require('bubbleChartView');
+    var d3               = require('d3/d3');
 
     var el = document.getElementById("charts");
     var mainContext = Engine.createContext(el);
@@ -36,10 +36,10 @@ define(function(require, exports, module) {
 
     mainContext.add(centerModifier).add(scrollview);
 
-    d3.csv('data/letters.csv', function (err, data) {
+    d3.csv('data/fuel.csv', function (err, data) {
 
       for (var i = 0; i < 30; i++) {
-          var view = barChartView(400, 800, data);
+          var view = bubbleChartView(450, data.slice(0));
           chartViews.push(view);
       }
 
