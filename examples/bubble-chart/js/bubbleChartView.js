@@ -8,14 +8,16 @@ define(function(require, exports, module) {
   var Easing        = require('famous/transitions/Easing');
   var Modifier      = require('famous/core/Modifier');
 
-  var createBubbleView = function (diameter, data) {
-    var tooltip = { w: 90, h: 40 };
-    var margins = {t: 50, r: 200, b: 20, l: 200};
-    var viewWidth  = diameter + margins.l + margins.r;
-    var viewHeight = diameter + margins.t + margins.b;
+  var createBubbleView = function (viewSize, data) {
+    var tooltip  = { w: 150, h: 60 };
+    var margins  = {t: 50, r: 150, b: 20, l: 150};
+
+    var dim1 = viewSize[0] - margins.l - margins.r;
+    var dim2 = viewSize[1] - margins.t - margins.b;
+    var diameter = dim1 < dim2 ? dim1: dim2;
 
     var format = d3.format(",d");
-    var color = d3.scale.ordinal().range(['rgb(140,81,10)','rgb(191,129,45)','rgb(223,194,125)','rgb(128,205,193)','rgb(53,151,143)','rgb(1,102,94)']);
+    var color = d3.scale.ordinal().range(['#58625C','#4C5355','#89817A','#36211C','#A5A9AA']);
 
     var bubble = d3.layout.pack()
         .sort(function (d) { return d.comb})
@@ -29,29 +31,67 @@ define(function(require, exports, module) {
 
     bubble.nodes({children: data});
 
-    // console.log("l", data);
-
     var background = new Surface({
-      size: [viewWidth, viewHeight],
+      size: viewSize,
       properties: {
-        backgroundColor: '#A2B5CD'
+        backgroundColor: '#fff',
+        border: '1px solid #6E7577',
+        borderRadius: '8px'
       }
     });
 
+    var tooltipSurface = new Surface({
+      size: [tooltip.w, tooltip.h],
+      classes: ['tooltip']
+    });
+
+    var tooltipModifier = new StateModifier({
+      origin: [0, 0]
+    });
+
     var getBubble = function (d) {
-      return new Surface({
-        size: [d.r*2, d.r*2],
-        content: d.r > 12 ? d.make + '<br/>' + d.model:'',
-        classes: ['bubble'],
+      var bubble = new Surface({
+        size: [d.r * 2, d.r * 2],
+        content: d.r > 10 ? d.make:'',
         properties: {
           fontSize: '9px',
-          borderRadius: d.r + 'px',
+          borderRadius: '50%',
           textAlign: 'center',
           color: 'white',
-          border: '2px solid grey',
+          border: '1px solid #121E21',
           backgroundColor: color(d.make)
         }
       });
+
+      bubble.on('mouseover', function (e) {
+        var newX, newY;
+
+        tooltipSurface.setProperties({display: 'inline'});
+
+        var text = d.make + "<br/>" + d.model.slice(0,20) + "<br/>MPG: " + d.comb + "<br/>" + d.trany.slice(0,21);
+        tooltipSurface.setContent(text);
+
+        newX = d.x + margins.l - (tooltip.w / 2) + d.r;
+        newY = d.y + margins.t - tooltip.h - 20;
+
+        tooltipModifier.setTransform(
+          Transform.translate(newX, newY, 2),
+          { duration : 50, curve: Easing.outCirc }
+        );
+
+        this.setProperties({
+          backgroundColor: '#A5A9AA'
+        });
+      });
+
+      bubble.on('mouseout', function() {
+        tooltipSurface.setProperties({display: 'none'});
+        this.setProperties({
+          backgroundColor: color(d.make)
+        });
+      });
+
+      return bubble;
     };
 
     var getBubbleModifier = function (d, i) {
@@ -61,127 +101,26 @@ define(function(require, exports, module) {
       });
 
       modifier.setTransform(
-        Transform.translate(d.x + 2000, d.y + margins.t, 2),
+        Transform.translate(d.x + 2000, d.y + margins.t, 1),
         { duration : 0 , curve: Easing.inOutElastic }
       );
       modifier.setTransform(
-        Transform.translate(d.x + margins.l, d.y + margins.t, 2),
+        Transform.translate(d.x + margins.l, d.y + margins.t, 1),
         { duration : i * 30 + 30, curve: Easing.inOutElastic }
       );
 
       return modifier;
     };
 
-    var view = new View({size: [viewWidth, viewHeight]});
+    var view = new View({size: viewSize});
     view.add(background);
-
+    view.add(tooltipModifier).add(tooltipSurface);
     data.forEach(function (item, index) {
       view.add(getBubbleModifier(item, index)).add(getBubble(item));
     });
 
-    //view.add(tooltipModifier).add(tooltipSurface);
-
     return view;
   };
-  //   var tooltip = { w: 90, h: 40 };
-  //   var margins = {t: 50, r: 20, b: 30, l: 40};
-  //   var width  = viewWidth  - margins.l - margins.r;
-  //   var height = viewHeight - margins.t - margins.b;
-
-  //   var x = d3.scale.ordinal()
-  //       .rangeRoundBands([0, width], .1);
-
-  //   var y = d3.scale.linear()
-  //       .range([height, 0]);
-
-  //   x.domain(data.map(function (d) { return d.letter; }));
-  //   y.domain([0, d3.max(data, function (d) { return d.frequency; })]);
-
-  //   var background = new Surface({
-  //     size: [viewWidth, viewHeight],
-  //     properties: {
-  //       border: '3px solid white',
-  //       borderRadius: '8px',
-  //       backgroundColor: '#696758'
-  //     }
-  //   });
-
-  //   var tooltipSurface = new Surface({
-  //     size: [tooltip.w, tooltip.h],
-  //     classes: ['tooltip']
-  //   });
-
-  //   var tooltipModifier = new StateModifier({
-  //     origin: [0, 0]
-  //   });
-
-  //   var getBar = function (d) {
-  //     var bar = new Surface({
-  //       size: [x.rangeBand(), height - y(d.frequency)],
-  //       content: height - y(d.frequency) > 12 ? (d.letter):'',
-  //       classes: ['bar'],
-  //       properties: {
-  //         textAlign: 'center',
-  //         color: '#36393B',
-  //         border: '2px solid white',
-  //         backgroundColor: '#EEE6AB'
-  //       }
-  //     });
-
-  //     bar.on('mouseover', function (e) {
-  //       var newX, newY;
-
-  //       tooltipSurface.setProperties({display: 'inline'});
-  //       tooltipSurface.setContent("Letter: " + d.letter + "<br/>" + d3.format('.2p')(d.frequency));
-
-  //       newX = x(d.letter) + margins.l - (tooltip.w / 2) + (x.rangeBand() / 2);
-  //       newY = y(d.frequency) + margins.t - tooltip.h - 15;
-
-  //       tooltipModifier.setTransform(
-  //         Transform.translate(newX, newY, 2),
-  //         { duration : 50, curve: Easing.outCirc }
-  //       );
-
-  //       this.setProperties({
-  //         backgroundColor: '#C5BC8E'
-  //       });
-  //     });
-
-  //     bar.on('mouseout', function() {
-  //       tooltipSurface.setProperties({display: 'none'});
-  //       this.setProperties({
-  //         backgroundColor: '#EEE6AB'
-  //       });
-  //     });
-
-  //     return bar;
-  //   };
-
-  //   var getBarModifier = function (d, i) { 
-  //     var modifier = new StateModifier();
-  //     modifier.setTransform(
-  //       Transform.translate(x(d.letter) + 1000, y(d.frequency) + margins.t, 1),
-  //       { duration : 0 , curve: Easing.inOutElastic }
-  //     );
-  //     modifier.setTransform(
-  //       Transform.translate(x(d.letter) + margins.l, y(d.frequency) + margins.t, 1),
-  //       { duration : i * 100 + 30, curve: Easing.inOutElastic }
-  //     );
-
-  //     return modifier;
-  //   };
-
-  //   var view = new View({size: [viewWidth, viewHeight]});
-  //   view.add(background);
-
-  //   data.forEach(function (item, index) {
-  //     view.add(getBarModifier(item, index)).add(getBar(item));
-  //   });
-
-  //   view.add(tooltipModifier).add(tooltipSurface);
-
-  //   return view;
-  // };
   
   module.exports = createBubbleView;
 });

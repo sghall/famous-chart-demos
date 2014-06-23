@@ -1,10 +1,14 @@
 body {
   color: white;
-  background-color: #36393B;
+  background-color: #A5A9AA;
 }
 
 #charts {
   height: 500px;
+}
+
+#intro {
+  margin-left: 50px;
 }
 
 .tooltip {

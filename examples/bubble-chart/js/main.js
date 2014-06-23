@@ -26,10 +26,10 @@ define(function(require, exports, module) {
     });
     scrollview.sequenceFrom(viewSequence);
 
-    var size = [800, 400];
+    var viewSize = [600, 400];
 
     var centerModifier = new StateModifier({
-        size: size,
+        size: viewSize,
         origin: [0.5, 0.5],
         align: [0.5, 0.5]
     });
@@ -39,7 +39,7 @@ define(function(require, exports, module) {
     d3.csv('data/fuel.csv', function (err, data) {
 
       for (var i = 0; i < 30; i++) {
-          var view = bubbleChartView(450, data.slice(0));
+          var view = bubbleChartView(viewSize, data.slice(0));
           chartViews.push(view);
       }
 

@@ -26,9 +26,9 @@ define(function(require, exports, module) {
     var background = new Surface({
       size: [viewWidth, viewHeight],
       properties: {
-        border: '3px solid white',
-        borderRadius: '8px',
-        backgroundColor: '#696758'
+        backgroundColor: '#fff',
+        border: '1px solid #6E7577',
+        borderRadius: '8px'
       }
     });
 
@@ -48,9 +48,9 @@ define(function(require, exports, module) {
         classes: ['bar'],
         properties: {
           textAlign: 'center',
-          color: '#36393B',
-          border: '2px solid white',
-          backgroundColor: '#EEE6AB'
+          color: '#FFFBF7',
+          border: '2px solid #A5A9AA',
+          backgroundColor: '#36211C'
         }
       });
 
@@ -69,14 +69,14 @@ define(function(require, exports, module) {
         );
 
         this.setProperties({
-          backgroundColor: '#C5BC8E'
+          backgroundColor: '#897D7A'
         });
       });
 
       bar.on('mouseout', function() {
         tooltipSurface.setProperties({display: 'none'});
         this.setProperties({
-          backgroundColor: '#EEE6AB'
+          backgroundColor: '#36211C'
         });
       });
 
