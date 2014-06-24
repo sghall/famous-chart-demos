@@ -1,0 +1,29 @@
+body {
+  color: white;
+  background-color: #A5A9AA;
+}
+
+#charts {
+  height: 500px;
+}
+
+#intro {
+  margin-left: 50px;
+}
+
+.tooltip {
+  display: none;
+  background: #45484B;
+  border: 2px solid white;
+  pointer-events: none;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font: bold 10px "Helvetica Neue", Sans-Serif;
+  font-stretch: condensed;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 0 7px black;
+}
