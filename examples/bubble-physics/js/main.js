@@ -20,7 +20,9 @@ define(function(require, exports, module) {
   var mainContext = Engine.createContext();
   mainContext.setPerspective(500);
   window.PE = new PhysicsEngine();
-  var collision = new Collisions({restitution : .8});
+  var collision = new Collisions({restitution : .75});
+  window.drag = new Drag({strength : .0005});
+
 
   d3.csv('data/fuel.csv', function (error, data) {
     window.data = data;
@@ -41,8 +43,8 @@ define(function(require, exports, module) {
         return {name: d, value: 1};
       });
 
-      var pack = d3.layout.pack().size([w, h]);
-      pack.nodes({children: nodes});
+      var map = d3.layout.treemap().size([w, h]).ratio(1/1);
+      map.nodes({children: nodes});
 
       return nodes;
     }
@@ -50,7 +52,7 @@ define(function(require, exports, module) {
     var getVectorField = function (x, y) {
       return new VectorField({
         field : VectorField.FIELDS.POINT_ATTRACTOR, 
-        strength : 0.000002,
+        strength : 0.00002,
         position: new Vector(x, y, 0)
       });
     };
@@ -91,14 +93,28 @@ define(function(require, exports, module) {
       var foci = {}
       for (var i = 0; i < centers.length; i++) {
         var center = foci[centers[i].name]= centers[i];
-        center.gravity = getVectorField(center.x, center.y);
+        var x = center.dx / 2 + center.x;
+        var y = center.dy / 2 + center.y;
+        center.gravity = getVectorField(x, y);
       }
       console.log(foci);
       for (var d = 0, len = targets.length; d < len; d++) {
         var gravity = foci[data[d][varname]].gravity;
         PE.attach([collision], targets, targets[d]);
-        PE.attach([gravity], targets[d]);
+        PE.attach([gravity, drag], targets[d]);
       }
+
+      setTimeout(function () {
+        var agents = PE._agents;
+        for (var a in agents) {
+          if (agents[a].agent instanceof Drag) {
+            console.log(+a, agents[a])
+            PE.detach(+a);
+          }
+        }
+      }, 10000);
+
+
     }
 
     function collide(alpha) {
