@@ -129,8 +129,11 @@ define(function(require, exports, module) {
 
     setTimeout(function () {
       draw('drive');
-    }, 20000)
+    }, 15000)
 
+    setTimeout(function () {
+      draw('trans');
+    }, 30000)
 
     function draw (varname) {
       var centers = getCenters(varname, 600, 600);
