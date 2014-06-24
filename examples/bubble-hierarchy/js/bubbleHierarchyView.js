@@ -17,12 +17,10 @@ define(function(require, exports, module) {
     var dim1 = viewSize[0] - margins.l - margins.r;
     var dim2 = viewSize[1] - margins.t - margins.b;
     var diameter = dim1 < dim2 ? dim1: dim2;
-
-    var format = d3.format(",d");
     var color = d3.scale.ordinal().range(['#58625C','#4C5355','#89817A','#36211C','#A5A9AA','#121E21']);
 
     var bubble = d3.layout.pack()
-        .sort(function (d) { return d.comb})
+        .sort(function (d) { return d.comb })
         .size([diameter, diameter])
         .padding(1.5)
 
@@ -59,11 +57,11 @@ define(function(require, exports, module) {
         return node;
       };
       return nest({}, 0);
-    }
+    };
 
     var root = formatJSON(data, groups);
     bubble.nodes(root);
-    console.log(root)
+
     var background = new Surface({
       size: viewSize,
       properties: {
@@ -86,7 +84,7 @@ define(function(require, exports, module) {
       if (d.depth === 0) {
         return '#C0B9B2';
       } else if (d.depth === 1){
-        return '#FFF';
+        return '#FFFFFF';
       } else {
         return color(d.make);
       }
@@ -155,7 +153,6 @@ define(function(require, exports, module) {
 
       return modifier;
     };
-
 
     var recurseBubbles = function (node) {
       view.add(getBubbleModifier(node, counter++)).add(getBubble(node));
