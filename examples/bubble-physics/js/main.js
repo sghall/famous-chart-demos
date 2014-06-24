@@ -104,15 +104,15 @@ define(function(require, exports, module) {
         PE.attach([gravity, drag], targets[d]);
       }
 
-      setTimeout(function () {
-        var agents = PE._agents;
-        for (var a in agents) {
-          if (agents[a].agent instanceof Drag) {
-            console.log(+a, agents[a])
-            PE.detach(+a);
-          }
-        }
-      }, 10000);
+      // setTimeout(function () {
+      //   var agents = PE._agents;
+      //   for (var a in agents) {
+      //     if (agents[a].agent instanceof Drag) {
+      //       console.log(+a, agents[a])
+      //       PE.detach(+a);
+      //     }
+      //   }
+      // }, 10000);
 
 
     }
