@@ -13,7 +13,7 @@ define(function(require, exports, module) {
   mainContext.setPerspective(500);
 
   d3.csv('data/fuel.csv', function (error, data) {
-
+    window.data = data;
     var width = 1000, height = 1000;
     var fill = d3.scale.ordinal().range(['#827d92','#827354','#523536','#72856a','#2a3285','#383435'])
     var svg = d3.select("#charts").append("svg")
@@ -61,7 +61,7 @@ define(function(require, exports, module) {
     draw('make');
 
     function draw (varname) {
-      var centers = getCenters(varname, 500, 500);
+      var centers = getCenters(varname, 600, 600);
       force.on("tick", tick(centers, varname, .85));
       labels(centers)
       force.start();
