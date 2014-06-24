@@ -20,8 +20,8 @@ define(function(require, exports, module) {
   var mainContext = Engine.createContext();
   mainContext.setPerspective(500);
   window.PE = new PhysicsEngine();
-  var collision = new Collisions({restitution : .75});
-  window.drag = new Drag({strength : .0005});
+  var collision = new Collisions({restitution : .8});
+  window.drag = new Drag({strength : .005});
 
 
   d3.csv('data/fuel.csv', function (error, data) {

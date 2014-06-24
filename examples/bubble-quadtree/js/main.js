@@ -39,10 +39,7 @@ define(function(require, exports, module) {
 
     window.data = data;
     var width = 1000, height = 1000;
-    var force = d3.layout.force()
-      .charge(0)
-      .gravity(0)
-      .size([width, height])
+    var force = d3.layout.force();
 
     var fill = d3.scale.ordinal().range(['#827d92','#827354','#523536','#72856a','#2a3285','#383435'])
 
@@ -94,7 +91,7 @@ define(function(require, exports, module) {
 
       modifier.setTransform(
         Transform.translate(d.x, d.y, 1),
-        { duration : 20, curve: Easing.inOutElastic }
+        { duration : 10, curve: Easing.inOutElastic }
       );
 
       return modifier;
@@ -137,7 +134,7 @@ define(function(require, exports, module) {
 
     function draw (varname) {
       var centers = getCenters(varname, 600, 600);
-      force.on("tick", tick(centers, varname, .85));
+      force.on("tick", tick(centers, varname, .95));
       force.start();
     }
 
@@ -154,7 +151,7 @@ define(function(require, exports, module) {
           collide(0.5)(data[d]);
           data[d].modifier.setTransform(
             Transform.translate(data[d].x, data[d].y, 0),
-            { duration : 10, curve: 'linear' }
+            { duration : 1, curve: 'linear' }
           )
         }
       }
