@@ -15,13 +15,28 @@ define(function(require, exports, module) {
   var StateModifier  = require('famous/modifiers/StateModifier');
   var Easing         = require('famous/transitions/Easing')
   var Vector         = require('famous/math/Vector');
+  var View           = require('famous/core/View');
   var d3             = require('d3/d3');
 
   var el = document.getElementById("charts");
   var mainContext = Engine.createContext(el);
-  mainContext.setPerspective(500);
+  var view = new View({size: [1000, 1000]});
+
 
   d3.csv('data/fuel.csv', function (error, data) {
+    var tooltip  = { w: 150, h: 60 };
+
+    var tooltipSurface = new Surface({
+      size: [tooltip.w, tooltip.h],
+      classes: ['tooltip']
+    });
+
+    var tooltipModifier = new StateModifier({
+      origin: [0, 0]
+    });
+
+    view.add(tooltipModifier).add(tooltipSurface);
+
     window.data = data;
     var width = 1000, height = 1000;
     var force = d3.layout.force()
@@ -31,8 +46,8 @@ define(function(require, exports, module) {
 
     var fill = d3.scale.ordinal().range(['#827d92','#827354','#523536','#72856a','#2a3285','#383435'])
 
-    var getSurface = function (d) {
-      return new Surface({
+    var getBubble = function (d) {
+      var bubble = new Surface({
         origin: [0.5, 0.5],
         size : [d.radius * 2, d.radius * 2],
         properties : {
@@ -41,10 +56,37 @@ define(function(require, exports, module) {
             border: '2px solid #333'
         }
       });
+
+      bubble.on('mouseover', function (e) {
+        var newX, newY;
+        tooltipSurface.setProperties({display: 'inline'});
+
+        var text = d.make + "<br/>" + d.model.slice(0,20) + "<br/>MPG: " + d.comb + "<br/>" + d.trany.slice(0,21);
+        tooltipSurface.setContent(text);
+
+        newX = d.x - (tooltip.w / 2) + d.radius;
+        newY = d.y - tooltip.h - 20;
+        tooltipModifier.setTransform(
+          Transform.translate(newX, newY, 5),
+          { duration : 50, curve: Easing.outCirc }
+        );
+
+        this.setProperties({
+          backgroundColor: '#C0B5B2'
+        });
+      });
+
+      bubble.on('mouseout', function() {
+        tooltipSurface.setProperties({display: 'none'});
+        this.setProperties({
+          backgroundColor: fill(d.make)
+        });
+      });
+
+      return bubble;
     };
 
-    var getSurfaceModifier = function (d, i) {
-      // console.log(i, d)
+    var getBubbleModifier = function (d, i) {
       var modifier = new StateModifier({
         align: [0, 0],
         origin: [0.5, 0.5]
@@ -52,7 +94,7 @@ define(function(require, exports, module) {
 
       modifier.setTransform(
         Transform.translate(d.x, d.y, 1),
-        { duration : 0, curve: Easing.inOutElastic }
+        { duration : 20, curve: Easing.inOutElastic }
       );
 
       return modifier;
@@ -62,16 +104,15 @@ define(function(require, exports, module) {
       data[j].radius = +data[j].comb / 2;
       data[j].x = Math.random() * 100 + 200;
       data[j].y = Math.random() * 100 + 200;
-      data[j].surface = getSurface(data[j]);
-      data[j].modifier = getSurfaceModifier(data[j], j);
-      mainContext.add(data[j].modifier).add(data[j].surface);
+      data[j].surface = getBubble(data[j]);
+      data[j].modifier = getBubbleModifier(data[j], j);
+      view.add(data[j].modifier).add(data[j].surface);
     }
+
+    mainContext.add(view);
 
     var padding = 2;
     var maxRadius = d3.max(_.pluck(data, 'radius'));
-
-
-    console.log(data);
 
     var getCenters = function (vname, w, h) {
       var nodes = _.uniq(_.pluck(data, vname)).map(function (d) {
@@ -85,6 +126,11 @@ define(function(require, exports, module) {
     }
 
     draw('make');
+
+    setTimeout(function () {
+      draw('drive');
+    }, 20000)
+
 
     function draw (varname) {
       var centers = getCenters(varname, 600, 600);
@@ -104,7 +150,7 @@ define(function(require, exports, module) {
           data[d].x += (target.x - data[d].x) * k * e.alpha;
           collide(0.5)(data[d]);
           data[d].modifier.setTransform(
-            Transform.translate(data[d].x, data[d].y, 10),
+            Transform.translate(data[d].x, data[d].y, 0),
             { duration : 10, curve: 'linear' }
           )
         }
