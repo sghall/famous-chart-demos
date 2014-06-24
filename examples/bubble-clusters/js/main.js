@@ -20,29 +20,24 @@ define(function(require, exports, module) {
         .attr("width", width)
         .attr("height", height);
 
-    _.each(data, function (elem) {
-      elem.radius = +elem.comb / 2;
-      elem.x = _.random(0, width);
-      elem.y = _.random(0, height);
-    })
+    for (var j = 0; j < data.length; j++) {
+      data[j].radius = +data[j].comb / 2;
+      data[j].x = Math.random() * width;
+      data[j].y = Math.random() * height;
+    }
 
     var padding = 4;
     var maxRadius = d3.max(_.pluck(data, 'radius'));
 
-
     function getCenters(vname, w, h) {
-      var nodes = [], c =[], result = {};
-      var v = _.uniq(_.pluck(data, vname));
-      var l = d3.layout.pack().size([w, h]);
-      _.each(v, function (k, i) {
-        c.push({name: k, value: 1}); 
+      var nodes = _.uniq(_.pluck(data, vname)).map(function (d) {
+        return {name: d, value: 1};
       });
-      nodes = l.nodes({children: c})[0].children;
 
-      for (var i = 0; i < nodes.length; i++) {
-        result[nodes[i].name] = nodes[i];
-      }
-      return result;
+      var pack = d3.layout.pack().size([w, h]);
+      pack.nodes({children: nodes});
+
+      return nodes;
     }
 
     var nodes = svg.selectAll("circle")
@@ -65,26 +60,25 @@ define(function(require, exports, module) {
 
     draw('make');
 
-    // $( ".btn" ).click(function() {
-    //   draw(this.id);
-    // });
-
     function draw (varname) {
-      var foci = getCenters(varname, 1000, 1000);
-      force.on("tick", tick(foci, varname, .85));
-      labels(foci)
+      var centers = getCenters(varname, 500, 500);
+      force.on("tick", tick(centers, varname, .85));
+      labels(centers)
       force.start();
     }
 
-    function tick (foci, varname, k) {
+    function tick (centers, varname, k) {
+      var foci = {}
+      for (var i = 0; i < centers.length; i++) {
+        foci[centers[i].name] = centers[i];
+      }
       return function (e) {
-        data.forEach(function(o, i) {
-          var f = foci[o[varname]];
-          o.y += (f.y - o.y) * k * e.alpha;
-          o.x += (f.x - o.x) * k * e.alpha;
-        });
-        nodes
-          .each(collide(.1))
+        for (var d = 0, len = data.length; d < len; d++) {
+          var target = foci[data[d][varname]];
+          data[d].y += (target.y - data[d].y) * k * e.alpha;
+          data[d].x += (target.x - data[d].x) * k * e.alpha;
+        }
+        nodes.each(collide(.1))
           .attr("cx", function (d) { return d.x; })
           .attr("cy", function (d) { return d.y; });
       }
@@ -94,36 +88,18 @@ define(function(require, exports, module) {
       svg.selectAll(".label").remove();
 
       svg.selectAll(".label")
-      .data(_.toArray(foci)).enter().append("text")
-      .attr("class", "label")
-      .text(function (d) { return d.name })
-      .attr("transform", function (d) {
-        return "translate(" + (d.x - ((d.name.length)*3)) + ", " + (d.y - d.r) + ")";
-      });
+      .data(foci).enter()
+        .append("text")
+          .attr("class", "label")
+          .text(function (d) { return d.name })
+          .attr("transform", function (d) {
+            return "translate(" + (d.x - ((d.name.length)*3)) + ", " + (d.y - d.r) + ")";
+          });
     }
-
-    // function removePopovers () {
-    //   $('.popover').each(function() {
-    //     $(this).remove();
-    //   }); 
-    // }
-
-    // function showPopover (d) {
-    //   $(this).popover({
-    //     placement: 'auto top',
-    //     container: 'body',
-    //     trigger: 'manual',
-    //     html : true,
-    //     content: function() { 
-    //       return "Make: " + d.make + "<br/>Model: " + d.model + "<br/>Drive: " + d.drive +
-    //              "<br/>Trans: " + d.trans + "<br/>MPG: " + d.comb; }
-    //   });
-    //   $(this).popover('show')
-    // }
 
     function collide(alpha) {
       var quadtree = d3.geom.quadtree(data);
-      return function(d) {
+      return function (d) {
         var r = d.radius + maxRadius + padding,
             nx1 = d.x - r,
             nx2 = d.x + r,
@@ -148,8 +124,4 @@ define(function(require, exports, module) {
       };
     }
   });
-
 });
-
-
-
