@@ -3,9 +3,9 @@ famous-chart-demos
 
 Start your local server from the root of the repo in order to get all the links correct for the examples.
 
-You really only need to look at the following examples.  The others are for demonstrating alternative ways of the doing the physics based example.
+You really only need to look at the examples hightlighted below.  The others are for demonstrating alternative ways of the doing the physics based example.
 
-Working examples using famo.us rendering.  All the relevent js for each example is inside of the "js" folder for each example.  In general, there is a main.js file that creates a scroll view with a series of chart view e.g barChartView.js in the bar-chart example folder.
+All the relevent code for each example is inside of the "js" folder inside each example folder.  In general, there is a main.js file that creates a scrollview with a series of chart views using a second file that has all the code for the making the chart view  e.g barChartView.js in the bar-chart example folder.
 
 In the "examples" directory:
 
@@ -22,5 +22,9 @@ The other folders in "examples". Again, these are there for reference, the above
 1. bubble-clusters:  this is an svg example that approximates the demo ar http://projects.delimited.io/experiments/force-bubbles/.  There is no famo.us rendering happening here.  It's just ther for reference.
 
 2. bubble-physics:  this is an example that uses the famo.us physics engine to do the multi-foci demo at http://projects.delimited.io/experiments/force-bubbles/  The example works but I wasn't able to get the bubbles to eventually settle and remain stable.  The bubble-quadtree example was created as a best attempt at creating the effect.
+
+TODO:
+Need better test data to demo these properly. All the examples need to have support for adding legends and title.  The bar chart example could also be extended to have SVG axes.
+
 
 
