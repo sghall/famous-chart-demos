@@ -13,6 +13,10 @@ body {
   margin-left: 50px;
 }
 
+.bubble {
+  opacity: .6;
+}
+
 .tooltip {
   display: none;
   background: #45484B;

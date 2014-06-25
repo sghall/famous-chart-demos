@@ -20,10 +20,12 @@ define(function(require, exports, module) {
 
   var el = document.getElementById("charts");
   var mainContext = Engine.createContext(el);
+  mainContext.setPerspective(500);
   var view = new View({size: [1000, 1000]});
 
 
   d3.csv('data/fuel.csv', function (error, data) {
+    //data = data.slice(0,50);
     var tooltip  = { w: 150, h: 60 };
 
     var tooltipSurface = new Surface({
@@ -35,8 +37,6 @@ define(function(require, exports, module) {
       origin: [0, 0]
     });
 
-    view.add(tooltipModifier).add(tooltipSurface);
-
     window.data = data;
     var width = 1000, height = 1000;
     var force = d3.layout.force();
@@ -47,6 +47,7 @@ define(function(require, exports, module) {
       var bubble = new Surface({
         origin: [0.5, 0.5],
         size : [d.radius * 2, d.radius * 2],
+        classes: ['bubble'],
         properties : {
             background : fill(d.make),
             borderRadius : '50%',
@@ -64,7 +65,7 @@ define(function(require, exports, module) {
         newX = d.x - (tooltip.w / 2) + d.radius;
         newY = d.y - tooltip.h - 20;
         tooltipModifier.setTransform(
-          Transform.translate(newX, newY, 5),
+          Transform.translate(newX, newY, 2),
           { duration : 50, curve: Easing.outCirc }
         );
 
@@ -98,17 +99,17 @@ define(function(require, exports, module) {
     };
 
     for (var j = 0; j < data.length; j++) {
-      data[j].radius = +data[j].comb / 2;
-      data[j].x = Math.random() * 100 + 200;
-      data[j].y = Math.random() * 100 + 200;
+      data[j].radius = +data[j].comb * .5;
+      data[j].x = Math.random() * 1000 + 200;
+      data[j].y = Math.random() * 1000 + 200;
       data[j].surface = getBubble(data[j]);
       data[j].modifier = getBubbleModifier(data[j], j);
       view.add(data[j].modifier).add(data[j].surface);
     }
-
+    view.add(tooltipModifier).add(tooltipSurface);
     mainContext.add(view);
 
-    var padding = 2;
+    var padding = .5;
     var maxRadius = d3.max(_.pluck(data, 'radius'));
 
     var getCenters = function (vname, w, h) {
@@ -132,13 +133,13 @@ define(function(require, exports, module) {
       draw('trans');
     }, 30000)
 
-    function draw (varname) {
+    function draw(varname) {
       var centers = getCenters(varname, 600, 600);
-      force.on("tick", tick(centers, varname, .95));
+      force.on("tick", tick(centers, varname));
       force.start();
     }
 
-    function tick (centers, varname, k) {
+    function tick(centers, varname) {
       var foci = {}
       for (var i = 0; i < centers.length; i++) {
         foci[centers[i].name] = centers[i];
@@ -146,13 +147,12 @@ define(function(require, exports, module) {
       return function (e) {
         for (var d = 0, len = data.length; d < len; d++) {
           var target = foci[data[d][varname]];
-          data[d].y += (target.y - data[d].y) * k * e.alpha;
-          data[d].x += (target.x - data[d].x) * k * e.alpha;
-          collide(0.5)(data[d]);
+          data[d].y += (target.y - data[d].y) * e.alpha;
+          data[d].x += (target.x - data[d].x) * e.alpha;
+          collide(.07)(data[d]);
           data[d].modifier.setTransform(
-            Transform.translate(data[d].x, data[d].y, 0),
-            { duration : 1, curve: 'linear' }
-          )
+            Transform.translate(data[d].x, data[d].y, 1)
+          );
         }
       }
     }
