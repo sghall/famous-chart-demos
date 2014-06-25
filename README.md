@@ -5,7 +5,7 @@ Start your local server from the root of the repo in order to get all the links 
 
 You really only need to look at the following examples.  The others are for demonstrating alternative ways of the doing the physics based example.
 
-Working examples using famo.us rendering.
+Working examples using famo.us rendering.  All the relevent js for each example is inside of the "js" folder for each example.  In general, there is a main.js file that creates a scroll view with a series of chart view e.g barChartView.js in the bar-chart example folder.
 
 In the "examples" directory:
 
@@ -17,7 +17,7 @@ In the "examples" directory:
 
 4. bubble-quadtree: this creates a single chart using famo.us surfaces that attempts to approximate this example (http://projects.delimited.io/experiments/force-bubbles/).  It does not use the famo.us physics engine.
 
-The other folders in "examples":
+The other folders in "examples". Again, these are there for reference, the above example are my most complete examples of each chart type.
 
 1. bubble-clusters:  this is an svg example that approximates the demo ar http://projects.delimited.io/experiments/force-bubbles/.  There is no famo.us rendering happening here.  It's just ther for reference.
 
