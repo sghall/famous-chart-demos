@@ -142,7 +142,7 @@ define(function(require, exports, module) {
           target = foci[actual[varname]];
           actual.y += ((target.y + target.dy / 2) - actual.y) * alpha;
           actual.x += ((target.x + target.dx / 2) - actual.x) * alpha;
-          collide(.5)(actual);
+          collide(.8)(actual);
           actual.modifier.setTransform(
             Transform.translate(actual.x, actual.y, 1)
           );
