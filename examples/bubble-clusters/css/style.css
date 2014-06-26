@@ -3,12 +3,25 @@ body {
   background-color: #A5A9AA;
 }
 
+button {
+  width: 33%;
+  height: 20px;
+  background-color: black;
+  color: white;
+}
+
 #charts {
+  position: absolute;
   height: 500px;
 }
 
 #intro {
   margin-left: 50px;
+  margin-right: 50px;
+}
+
+.bubble {
+  opacity: .6;
 }
 
 .tooltip {
