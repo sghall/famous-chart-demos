@@ -7,6 +7,8 @@ define(function(require, exports, module) {
   var StateModifier  = require('famous/modifiers/StateModifier');
   var Timer          = require('famous/utilities/Timer')
 
+  window.d3 = d3;
+
   var color = d3.scale.ordinal().range(['#586C97','#AA8439','#4C5355','#E2BF7A','#36211C','#4C838A','#723E0F']);
   var tooltip  = { w: 150, h: 60 }, padding = 1, prerender, maxRadius, data;
 
@@ -121,11 +123,11 @@ define(function(require, exports, module) {
     }
     prerender = tickFactory(centers, varname);
     Timer.every(prerender);
-    // labels(centers);
+    labels(centers);
   }
 
   var tickFactory = function (centers, varname) {
-    var duration = 5000, foci = {}, alpha = 0;
+    var duration = 8000, foci = {}, alpha = 0;
     var start = Date.now();
     for (var i = 0; i < centers.length; i++) {
       foci[centers[i].name] = centers[i];
@@ -149,18 +151,17 @@ define(function(require, exports, module) {
     }
   }
 
-  // function labels (foci) {
-  //   var labels = d3.select("#charts").selectAll(".label");
-  //   labels.remove();
-  //   labels.data(foci).enter().append("div")
-  //     .text(function (d) { return d.name })
-  //     .attr("class", "label")
-  //     .style("position", "absolute")
-  //     .style("text-align", "center")
-  //     .style("width", function (d) { return d.dx + "px"; })
-  //     .style("left", function (d) { return d.x + 10 + "px"; })
-  //     .style("top", function (d) { return d.y + "px"; });
-  // }
+  var labels = function (foci) {
+    d3.select("#bg-svg").selectAll(".label").remove();
+
+    d3.select("#bg-svg").selectAll(".label").data(foci)
+      .enter().append("text")
+      .attr("class", "label")
+      .text(function (d) { return d.name })
+      .attr("transform", function (d) {
+        return "translate(" + (d.x + (d.dx / 2)) + ", " + (d.y + 20) + ")";
+      });
+  }
 
   var collide = function (alpha) {
     var quadtree = d3.geom.quadtree(data);
