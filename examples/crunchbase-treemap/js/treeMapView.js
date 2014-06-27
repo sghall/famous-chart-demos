@@ -10,7 +10,8 @@ define(function(require, exports, module) {
 
   var treeMapView = function (viewSize, groups, data, title) {
     var tooltip  = { w: 150, h: 60 };
-    var margins  = {t: 50, r: 130, b: 20, l: 130};
+    var margins  = {t: 50, r: 20, b: 20, l: 20};
+    var chartSize = [viewSize[0] - margins.l - margins.r, viewSize[1] - margins.t - margins.b]
     var view = new View({size: viewSize});
     var counter = 0;
     var format = d3.format(",")
@@ -21,7 +22,7 @@ define(function(require, exports, module) {
     var color = d3.scale.ordinal().range(['#4C5355','#E2BF7A','#36211C','#4C838A','#723E0F','#586C97','#AA8439']);
 
     var treemap = d3.layout.treemap()
-       .size(viewSize)
+       .size(chartSize)
        .ratio(1/1);
 
     for (var i = 0; i < data.length; i++) {
@@ -127,7 +128,7 @@ define(function(require, exports, module) {
           var text = d.Region + "<br/>" + d.Market + "<br/>" + d.Funding + "<br/>$" + format(d.Amount);
           tooltipSurface.setContent(text);
 
-          newX = d.x + margins.l - (tooltip.w / 2) + d.r;
+          newX = d.x + margins.l - (tooltip.w / 2) + (d.dx / 2);
           newY = d.y + margins.t - tooltip.h - 20;
 
           tooltipModifier.setTransform(
@@ -154,7 +155,7 @@ define(function(require, exports, module) {
     var getTileModifier = function (d, i) {
       var modifier = new StateModifier({
         align: [0, 0],
-        origin: [0.5, 0.5]
+        origin: [0, 0]
       });
 
       modifier.setTransform(
@@ -181,7 +182,7 @@ define(function(require, exports, module) {
     view.add(background);
     view.add(tooltipModifier).add(tooltipSurface);
     view.add(titleModifier).add(titleSurface);
-
+    console.log(title)
     console.log(root);
 
     recurseTiles(root);

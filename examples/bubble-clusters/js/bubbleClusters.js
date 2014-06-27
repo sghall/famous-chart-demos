@@ -67,7 +67,7 @@ define(function(require, exports, module) {
     var modifier = new StateModifier({
       align: [0, 0],
       origin: [0.5, 0.5],
-      opacity: .85
+      opacity: .75
     });
 
     modifier.setTransform(
@@ -85,7 +85,10 @@ define(function(require, exports, module) {
     var svg = '<svg id="bg-svg" width="' + size[0] + '" height="' + size[1] + '"></svg>'
     var svgContainer = new Surface({
       size: [undefined, undefined],
-      content: svg
+      content: svg,
+      properties: {
+        zIndex: -20
+      }
     });
     view.add(svgContainer);
 
@@ -115,39 +118,42 @@ define(function(require, exports, module) {
 
     return nodes;
   };
+  var force = d3.layout.force();
 
   var updateView = function (size, varname) {
     var centers = getCenters(varname, size);
-    if (prerender) {
-      Timer.clear(prerender);
-    }
-    prerender = tickFactory(centers, varname);
-    Timer.every(prerender);
+    force.on('tick', tickFactory(centers, varname));
+    force.start();
+    // if (prerender) {
+    //   Timer.clear(prerender);
+    // }
+    // prerender = tickFactory(centers, varname);
+    // Timer.every(prerender);
     labels(centers);
   }
 
   var tickFactory = function (centers, varname) {
-    var duration = 8000, foci = {}, alpha = 0;
+    var duration = 8000, foci = {}; //alpha = 0;
     var start = Date.now();
     for (var i = 0; i < centers.length; i++) {
       foci[centers[i].name] = centers[i];
     }
-    return function () {
-      var target, actual, telapsed;
+    return function (e) {
+      var target, actual, telapsed, quad = collide(.1);
       telapsed = Date.now() - start;
-      if (telapsed < duration) {
-        alpha = (1 - (telapsed / duration)) * .04;
+      // if (telapsed < duration) {
+        // alpha = .02 //(1 - (telapsed / duration)) * .04;
         for (var d = 0, len = data.length; d < len; d++) {
           actual = data[d];
           target = foci[actual[varname]];
-          actual.y += ((target.y + target.dy / 2) - actual.y) * alpha;
-          actual.x += ((target.x + target.dx / 2) - actual.x) * alpha;
-          collide(.8)(actual);
+          actual.y += ((target.y + target.dy / 2) - actual.y) * e.alpha;
+          actual.x += ((target.x + target.dx / 2) - actual.x) * e.alpha;
           actual.modifier.setTransform(
             Transform.translate(actual.x, actual.y, 1)
           );
+          quad(actual);
         }
-      }
+      // }
     }
   }
 

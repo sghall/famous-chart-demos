@@ -1,9 +1,4 @@
 Market,Region,Funding,Amount,Count,AVG
-"Advertising Platforms","Atlanta","Seed",2000000,1,2000000
-"Coupons","Atlanta","Venture",3000000,1,3000000
-"Credit","Atlanta","Venture",50000000,1,50000000
-"Crowdsourcing","Atlanta","Seed",1000000,1,1000000
-"Groceries","Atlanta","Unknown",2500,1,2500
 "Architecture","Austin","Seed",1536871,1,1536871
 "B2B","Austin","Venture",10525000,2,5262500
 "Communities","Austin","Venture",20290277,2,10145138
@@ -17,7 +12,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Network Security","Austin","Venture",57000000,1,57000000
 "Nonprofits","Austin","Venture",675000,1,675000
 "Social Media","Austin","Venture",14000000,1,14000000
-"Entertainment","Bangalore","Seed",100000,1,100000
 "Social Media","Beijing","Unknown",25000000,1,25000000
 "Artists Globally","Berlin","Venture",60000000,1,60000000
 "Auctions","Berlin","Venture",30000000,1,30000000
@@ -51,25 +45,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Nonprofits","Boston","Venture",260000,1,260000
 "Politics","Boston","Seed",150000,2,75000
 "Saas","Boston","Venture",9499986,1,9499986
-"Agriculture","Chicago","Seed",1000000,1,1000000
-"All Markets","Chicago","Seed",620000,1,620000
-"Chat","Chicago","Venture",9000000,1,9000000
-"Contact Management","Chicago","Seed",1000000,1,1000000
-"Cooking","Chicago","Seed",8000,1,8000
-"Local Businesses","Chicago","Seed",10000,1,10000
-"Local Businesses","Chicago","Unknown",5000,1,5000
-"Logistics","Chicago","Unknown",11579400,1,11579400
-"Search","Chicago","Venture",525000,1,525000
-"Social Media","Chicago","Venture",300000,1,300000
-"Food Processing","China (Outside Beijing)","Venture",20000000,1,20000000
-"Social Media","China (Outside Beijing)","Venture",1600000,1,1600000
-"Financial Services","Dallas-Fort Worth","Venture",9611670,1,9611670
-"Iaas","Dallas-Fort Worth","Venture",25000000,1,25000000
-"Brand Marketing","Denver","Venture",1344995,1,1344995
-"Customer Service","Denver","Venture",4000000,1,4000000
-"Local Search","Denver","Convertible Note",85000,1,85000
-"Location Based Services","Denver","Unknown",1345389,1,1345389
-"Sales And Marketing","Denver","Venture",3200000,1,3200000
 "Consumer Electronics","Dublin","Seed",13568,1,13568
 "Email","Dublin","Angel",817895,1,817895
 "Heathcare","Dublin","Venture",285000,1,285000
@@ -128,9 +103,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Search","Los Angeles","Venture",6349985,1,6349985
 "Social Media","Los Angeles","Seed",306000,2,153000
 "Sports","Los Angeles","Seed",2100000,1,2100000
-"Chat","New Delhi","Seed",100000,1,100000
-"Computers","New Delhi","Venture",28000000,1,28000000
-"Nonprofits","New Delhi","Unknown",4700000,1,4700000
 "Accounting","New York City","Unknown",1000000,1,1000000
 "Advice","New York City","Seed",900000,1,900000
 "Architecture","New York City","Seed",2000000,1,2000000
@@ -182,7 +154,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Sports","New York City","Venture",10000000,1,10000000
 "Mobile Commerce","Orange County","Seed",500000,1,500000
 "Mobile Commerce","Orange County","Venture",550000,1,550000
-"Sports","Philadelphia","Unknown",1300000,1,1300000
 "3D","SF Bay Area","Seed",1200000,1,1200000
 "3D","SF Bay Area","Venture",1490497,1,1490497
 "3D Printing","SF Bay Area","Seed",1000000,1,1000000
@@ -276,7 +247,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Computers","San Diego","Seed",600000,1,600000
 "Music","San Diego","Equity Crowdfunding",1000000,1,1000000
 "Saas","San Diego","Unknown",12000000,1,12000000
-"Data Centers","Santa Barbara","Unknown",7499999,1,7499999
 "Agriculture","Seattle","Seed",1300000,1,1300000
 "Artificial Intelligence","Seattle","Seed",750000,1,750000
 "Big Data Analytics","Seattle","Seed",1241000,1,1241000
@@ -293,30 +263,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Qr Codes","Seattle","Unknown",256071,1,256071
 "Social Media","Seattle","Venture",175000,1,175000
 "Pets","Shanghai","Venture",25000000,1,25000000
-"Crowdfunding","Stockholm","Equity Crowdfunding",540000,1,540000
-"Film","Stockholm","Venture",5000000,1,5000000
-"Mobile Payments","Stockholm","Venture",55347745,1,55347744
-"Crowdsourcing","Sydney","Venture",8500000,1,8500000
-"Data Mining","Sydney","Venture",10000000,1,10000000
-"3D","Tel Aviv","Seed",28437,1,28437
-"Accounting","Tel Aviv","Venture",7000000,1,7000000
-"Art","Tel Aviv","Venture",2000000,1,2000000
-"Cloud Security","Tel Aviv","Venture",16500000,1,16500000
-"Computer Vision","Tel Aviv","Seed",50000,1,50000
-"Messaging","Tel Aviv","Seed",630000,1,630000
-"Social Media Platforms","Tel Aviv","Angel",1200000,1,1200000
-"Sports","Tel Aviv","Venture",3500000,1,3500000
-"Broadcasting","Toronto","Venture",4500000,1,4500000
-"Cad","Toronto","Seed",2300000,1,2300000
-"Concerts","Toronto","Venture",3500000,1,3500000
-"Construction","Toronto","Seed",1200000,1,1200000
-"E-Books","Toronto","Venture",3800000,1,3800000
-"Enterprises","Toronto","Seed",2900000,2,1450000
-"Home & Garden","Toronto","Venture",57000000,1,57000000
-"Pharmaceuticals","Toronto","Venture",6300000,1,6300000
-"Publishing","Toronto","Venture",2750000,1,2750000
-"B2B","Twin Cities","Seed",125000,1,125000
-"Social Media","Twin Cities","Seed",2000000,1,2000000
 "All Markets","Washington D.C.","Venture",1500000,1,1500000
 "Business Development","Washington D.C.","Unknown",37499994,1,37499992
 "Clean Energy","Washington D.C.","Venture",11000000,1,11000000

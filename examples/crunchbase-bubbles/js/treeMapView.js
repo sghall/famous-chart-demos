@@ -23,13 +23,12 @@ define(function(require, exports, module) {
     var bubble = d3.layout.pack()
         .sort(function (d) { return d.comb })
         .size([diameter, diameter])
-        .padding(1.5)
+        .padding(2)
 
     for (var i = 0; i < data.length; i++) {
       data[i].Amount = +data[i].Amount;
       data[i].value  = data[i].Amount;
     }
-    console.log(data);
 
     var formatJSON = function (csvData, groups) {
 
@@ -185,6 +184,8 @@ define(function(require, exports, module) {
     view.add(tooltipModifier).add(tooltipSurface);
     view.add(titleModifier).add(titleSurface);
 
+    console.log(title);
+    console.log(root);
 
     recurseBubbles(root);
 
