@@ -28,7 +28,7 @@ define(function(require, exports, module) {
           zIndex: -50,
           background : color(d.make),
           borderRadius : '50%',
-          border: '4px solid #fff'
+          border: '2px solid #fff'
       }
     });
 
@@ -134,7 +134,7 @@ define(function(require, exports, module) {
       elapsed = Date.now() - start;
       if (elapsed < duration) {
         beta = (1 - (elapsed / duration)) * .09;
-        quad = collide(.095);
+        quad = collide(.11);
         for (var d = 0, len = data.length; d < len; d++) {
           actual = data[d];
           target = foci[actual[varname]];

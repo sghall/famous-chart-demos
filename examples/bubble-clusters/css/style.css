@@ -4,9 +4,9 @@ body {
 }
 
 button {
-  width: 33%;
-  height: 20px;
-  background-color: black;
+  width: 150px;
+  height: 30px;
+  background-color: grey;
   color: white;
 }
 

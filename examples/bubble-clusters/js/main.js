@@ -8,7 +8,7 @@ define(function(require, exports, module) {
   var mainCntxt = Engine.createContext(el);
 
   d3.csv('data/fuel.csv', function (error, data) {
-    var size = [1000, 400];
+    var size = [500, 500];
     var view = Bubble.createView(size, data);
     mainCntxt.add(view);
 
