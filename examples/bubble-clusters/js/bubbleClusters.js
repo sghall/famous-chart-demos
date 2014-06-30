@@ -1,16 +1,14 @@
 define(function(require, exports, module) {
   'use strict';
-  var d3             = require('d3/d3');
-  var View           = require('famous/core/View');
-  var Surface        = require('famous/core/Surface');
-  var Transform      = require('famous/core/Transform');
-  var StateModifier  = require('famous/modifiers/StateModifier');
-  var Timer          = require('famous/utilities/Timer')
-
-  window.d3 = d3;
+  var d3            = require('d3/d3');
+  var View          = require('famous/core/View');
+  var Surface       = require('famous/core/Surface');
+  var Transform     = require('famous/core/Transform');
+  var StateModifier = require('famous/modifiers/StateModifier');
+  var Timer         = require('famous/utilities/Timer')
 
   var color = d3.scale.ordinal().range(['#586C97','#AA8439','#4C5355','#E2BF7A','#36211C','#4C838A','#723E0F']);
-  var tooltip  = { w: 150, h: 60 }, padding = 1, prerender, maxRadius, data;
+  var tooltip  = { w: 150, h: 60 }, padding = 1.5, prerender, maxRadius, data;
 
   var tooltipSurface = new Surface({
     size: [tooltip.w, tooltip.h],
@@ -91,8 +89,8 @@ define(function(require, exports, module) {
 
     for (var j = 0; j < data.length; j++) {
       data[j].radius = +data[j].comb * .5;
-      data[j].x = Math.random() * size[0];
-      data[j].y = Math.random() * size[1];
+      data[j].x = Math.random() * size[0] / 2;
+      data[j].y = Math.random() * size[1] / 2;
       data[j].surface = getBubble(data[j]);
       data[j].modifier = getBubbleModifier(data[j], j);
       view.add(data[j].modifier).add(data[j].surface);
@@ -124,30 +122,32 @@ define(function(require, exports, module) {
   }
 
   var tickFactory = function (centers, varname) {
-    var duration = 2500, foci = {};
-    var start = Date.now();
+    var start = Date.now(), duration = 3000;
+
+    var foci = {}; 
     for (var i = 0; i < centers.length; i++) {
       foci[centers[i].name] = centers[i];
     }
     return function () {
-      var target, actual, telapsed, quad, alpha;
-      telapsed = Date.now() - start;
-      if (telapsed < duration) {
-        alpha = (1 - (telapsed / duration)) * .075;
-        quad = collide(.1);
+      var target, actual, elapsed, quad, beta;
+
+      elapsed = Date.now() - start;
+      if (elapsed < duration) {
+        beta = (1 - (elapsed / duration)) * .09;
+        quad = collide(.095);
         for (var d = 0, len = data.length; d < len; d++) {
           actual = data[d];
           target = foci[actual[varname]];
-          actual.y += ((target.y + target.dy / 2) - actual.y) * alpha;
-          actual.x += ((target.x + target.dx / 2) - actual.x) * alpha;
-          quad(actual);
+          actual.y += ((target.y + target.dy / 2) - actual.y) * beta;
+          actual.x += ((target.x + target.dx / 2) - actual.x) * beta;
+          quad(data[d]);
           actual.modifier.setTransform(
             Transform.translate(actual.x, actual.y, 1)
           );
         }
       }
     }
-  }
+  };
 
   var labels = function (foci) {
     d3.select("#bg-svg").selectAll(".label").remove();
@@ -186,7 +186,7 @@ define(function(require, exports, module) {
         return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
       });
     };
-  }
+  };
   module.exports = {
     createView: createView,
     updateView: updateView
