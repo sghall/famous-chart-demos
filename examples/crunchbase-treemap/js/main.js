@@ -26,7 +26,7 @@ define(function(require, exports, module) {
   });
   scrollview.sequenceFrom(viewSequence);
 
-  var viewSize = [600, 400];
+  var viewSize = [1000, 500];
 
   var centerModifier = new StateModifier({
     size: viewSize,

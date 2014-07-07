@@ -79,7 +79,7 @@ define(function(require, exports, module) {
       properties: {
         zIndex: 5,
         fontSize: '20px',
-        textAlign: 'center',
+        textAlign: 'left',
         color: 'black',
       }
     });
@@ -164,7 +164,7 @@ define(function(require, exports, module) {
       );
       modifier.setTransform(
         Transform.translate(d.x + margins.l, d.y + margins.t, d.depth + 2),
-        { duration : i * 30 + 30, curve: Easing.inOutElastic }
+        { duration : i * 20 + 30, curve: Easing.inOutElastic }
       );
 
       return modifier;
