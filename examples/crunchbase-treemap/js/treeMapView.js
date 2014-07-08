@@ -63,6 +63,10 @@ define(function(require, exports, module) {
     var root = formatJSON(data, groups);
     treemap.nodes(root);
 
+    var backgroundModifier = new StateModifier({
+      opacity: .7
+    });
+
     var background = new Surface({
       size: viewSize,
       properties: {
@@ -115,6 +119,7 @@ define(function(require, exports, module) {
           fontSize: '9px',
           textAlign: 'center',
           color: 'white',
+          marginTop: '5px',
           border: '1px solid #121E21',
           backgroundColor: getColor(d)
         }
@@ -129,7 +134,7 @@ define(function(require, exports, module) {
           tooltipSurface.setContent(text);
 
           newX = d.x + margins.l - (tooltip.w / 2) + (d.dx / 2);
-          newY = d.y + margins.t - tooltip.h - 20;
+          newY = d.y + margins.t - tooltip.h;
 
           tooltipModifier.setTransform(
             Transform.translate(newX, newY, 10),
@@ -179,11 +184,11 @@ define(function(require, exports, module) {
       }
     };
 
-    view.add(background);
+    view.add(backgroundModifier).add(background);
     view.add(tooltipModifier).add(tooltipSurface);
     view.add(titleModifier).add(titleSurface);
-    console.log(title)
-    console.log(root);
+    // console.log(title)
+    // console.log(root);
 
     recurseTiles(root);
 

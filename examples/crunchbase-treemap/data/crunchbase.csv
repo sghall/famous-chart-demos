@@ -1,27 +1,4 @@
 Market,Region,Funding,Amount,Count,AVG
-"Architecture","Austin","Seed",1536871,1,1536871
-"B2B","Austin","Venture",10525000,2,5262500
-"Communities","Austin","Venture",20290277,2,10145138
-"Crm","Austin","Venture",250000,1,250000
-"Energy","Austin","Venture",2066851,1,2066851
-"Enterprise Purchasing","Austin","Unknown",19800000,1,19800000
-"Fitness","Austin","Seed",50000,1,50000
-"Hardware","Austin","Venture",18810000,1,18810000
-"Human Resources","Austin","Seed",1500000,1,1500000
-"Identity Management","Austin","Venture",2500000,1,2500000
-"Network Security","Austin","Venture",57000000,1,57000000
-"Nonprofits","Austin","Venture",675000,1,675000
-"Social Media","Austin","Venture",14000000,1,14000000
-"Social Media","Beijing","Unknown",25000000,1,25000000
-"Artists Globally","Berlin","Venture",60000000,1,60000000
-"Auctions","Berlin","Venture",30000000,1,30000000
-"Banking","Berlin","Unknown",550000,1,550000
-"Cars","Berlin","Unknown",7000000,1,7000000
-"Consumers","Berlin","Seed",643300,1,643300
-"Consumers","Berlin","Venture",20000000,1,20000000
-"Financial Services","Berlin","Seed",138178,1,138178
-"Local Businesses","Berlin","Venture",8000000,1,8000000
-"Messaging","Berlin","Angel",82635,1,82635
 "Ad Targeting","Boston","Seed",2200000,1,2200000
 "Adventure Travel","Boston","Convertible Note",15000,1,15000
 "Agriculture","Boston","Seed",4099998,2,2049999
@@ -45,10 +22,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Nonprofits","Boston","Venture",260000,1,260000
 "Politics","Boston","Seed",150000,2,75000
 "Saas","Boston","Venture",9499986,1,9499986
-"Consumer Electronics","Dublin","Seed",13568,1,13568
-"Email","Dublin","Angel",817895,1,817895
-"Heathcare","Dublin","Venture",285000,1,285000
-"Social Media","Dublin","Venture",6000000,1,6000000
 "Accounting","London","Seed",1000000,1,1000000
 "Artificial Intelligence","London","Seed",150000,1,150000
 "Auctions","London","Venture",8362900,1,8362900
@@ -152,8 +125,6 @@ Market,Region,Funding,Amount,Count,AVG
 "Social Media","New York City","Seed",4300000,2,2150000
 "Sports","New York City","Seed",20000,1,20000
 "Sports","New York City","Venture",10000000,1,10000000
-"Mobile Commerce","Orange County","Seed",500000,1,500000
-"Mobile Commerce","Orange County","Venture",550000,1,550000
 "3D","SF Bay Area","Seed",1200000,1,1200000
 "3D","SF Bay Area","Venture",1490497,1,1490497
 "3D Printing","SF Bay Area","Seed",1000000,1,1000000
@@ -238,40 +209,3 @@ Market,Region,Funding,Amount,Count,AVG
 "Shipping","SF Bay Area","Seed",2250000,1,2250000
 "Social Media","SF Bay Area","Seed",25000,1,25000
 "Social Media","SF Bay Area","Venture",19600000,2,9800000
-"Chat","Salt Lake City","Venture",7000003,1,7000003
-"Consumer Internet","Salt Lake City","Venture",2250000,1,2250000
-"Financial Services","Salt Lake City","Venture",62500,1,62500
-"Music","Salt Lake City","Seed",350000,1,350000
-"Search","Salt Lake City","Venture",2000000,1,2000000
-"Brand Marketing","San Diego","Seed",25000,1,25000
-"Computers","San Diego","Seed",600000,1,600000
-"Music","San Diego","Equity Crowdfunding",1000000,1,1000000
-"Saas","San Diego","Unknown",12000000,1,12000000
-"Agriculture","Seattle","Seed",1300000,1,1300000
-"Artificial Intelligence","Seattle","Seed",750000,1,750000
-"Big Data Analytics","Seattle","Seed",1241000,1,1241000
-"Career Planning","Seattle","Venture",8000000,1,8000000
-"Cosmetics","Seattle","Venture",30000000,1,30000000
-"Developer Apis","Seattle","Venture",3328850,1,3328850
-"E-Commerce Platforms","Seattle","Seed",35000,1,35000
-"Enterprises","Seattle","Seed",372000,1,372000
-"File Sharing","Seattle","Unknown",375000,1,375000
-"Home & Garden","Seattle","Seed",3500000,1,3500000
-"Local Businesses","Seattle","Unknown",479340,1,479340
-"Pets","Seattle","Seed",35000,1,35000
-"Presentations","Seattle","Unknown",750000,1,750000
-"Qr Codes","Seattle","Unknown",256071,1,256071
-"Social Media","Seattle","Venture",175000,1,175000
-"Pets","Shanghai","Venture",25000000,1,25000000
-"All Markets","Washington D.C.","Venture",1500000,1,1500000
-"Business Development","Washington D.C.","Unknown",37499994,1,37499992
-"Clean Energy","Washington D.C.","Venture",11000000,1,11000000
-"Colleges","Washington D.C.","Unknown",9500000,1,9500000
-"Coupons","Washington D.C.","Venture",1401314,1,1401314
-"Crm","Washington D.C.","Unknown",750000,1,750000
-"Crm","Washington D.C.","Venture",5000000,1,5000000
-"Crowdfunding","Washington D.C.","Venture",31000000,1,31000000
-"Customer Service","Washington D.C.","Venture",4200000,1,4200000
-"Design","Washington D.C.","Venture",320000,1,320000
-"Fitness","Washington D.C.","Venture",15000,1,15000
-"Social Media","Washington D.C.","Venture",6500000,1,6500000

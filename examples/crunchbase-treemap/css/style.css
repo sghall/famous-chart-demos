@@ -1,11 +1,15 @@
 body {
-  color: white;
+  color: black;
   font-family: arial, Sans-Serif;
-  background-color: #A5A9AA;
+  background-color: #333;
+}
+
+.title {
+  padding-top: 10px;
 }
 
 #charts {
-  height: 500px;
+  height: 700px;
 }
 
 #intro {
