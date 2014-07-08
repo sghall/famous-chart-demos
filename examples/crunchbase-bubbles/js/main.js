@@ -13,6 +13,7 @@ define(function(require, exports, module) {
   var mainContext = Engine.createContext(el);
   mainContext.setPerspective(500);
 
+
   var chartViews = [];
   var scrollview = new Scrollview({
       margin: 50
@@ -26,7 +27,7 @@ define(function(require, exports, module) {
   });
   scrollview.sequenceFrom(viewSequence);
 
-  var viewSize = [600, 400];
+  var viewSize = [1000, 600];
 
   var centerModifier = new StateModifier({
     size: viewSize,

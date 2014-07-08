@@ -10,7 +10,7 @@ define(function(require, exports, module) {
 
   var treeMapView = function (viewSize, groups, data, title) {
     var tooltip  = { w: 150, h: 60 };
-    var margins  = {t: 50, r: 130, b: 20, l: 130};
+    var margins  = {t: 50, r: 100, b: 20, l: 200};
     var view = new View({size: viewSize});
     var counter = 0;
     var format = d3.format(",")
@@ -79,7 +79,7 @@ define(function(require, exports, module) {
       properties: {
         zIndex: 5,
         fontSize: '20px',
-        textAlign: 'center',
+        textAlign: 'left',
         color: 'black',
       }
     });

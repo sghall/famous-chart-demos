@@ -4,8 +4,12 @@ body {
   background-color: #A5A9AA;
 }
 
+.title {
+  padding-top: 10px;
+}
+
 #charts {
-  height: 500px;
+  height: 650px;
 }
 
 #intro {
