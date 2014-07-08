@@ -1,10 +1,15 @@
 body {
+  padding-left: 75px;
   color: white;
-  background-color: #A5A9AA;
+  background-color: #333;
 }
 
+text {
+  fill: white;
+} 
+
 button {
-  width: 150px;
+  width: 333px;
   height: 30px;
   background-color: grey;
   color: white;
