@@ -1,15 +1,14 @@
 {
   "name": "famous",
   "homepage": "https://github.com/Famous/famous",
-  "version": "0.2.1",
-  "_release": "0.2.1",
+  "version": "0.2.2",
+  "_release": "0.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.2.1",
-    "commit": "6fc40735d19b291a93be210fd6a755caa6fd1529"
+    "tag": "0.2.2",
+    "commit": "05c8ea95f1bf8e5a8eaa6410d27113385c68a857"
   },
   "_source": "git://github.com/Famous/famous.git",
   "_target": "~0.2.1",
-  "_originalSource": "famous",
-  "_direct": true
+  "_originalSource": "famous"
 }
